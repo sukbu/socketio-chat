@@ -1,0 +1,25 @@
+<html>
+
+<head>
+    <h2>Delete account</h2>
+</head>
+
+<body>
+    <form action="/delete_process" method="POST">
+        <%= accountInfo.firstname %>, Consider carefully.<br />
+        If you drop your account, all your business relations and your information will be gone from our
+        services<br /><br />
+        <p>
+            email: <%= accountInfo.email %>
+        </p>
+        <p>
+            <h3>Input password for ensure</h3>
+        </p>
+        <p>
+            <input type="password" name="userpw" placeholder="Password">
+        </p>
+        <input type="submit" value="Considered all, want to drop my account">
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,9 @@
+{
+    "database" :
+    {
+        "host"      :   "222.118.89.216",
+        "user"      :   "chatserver_dba",
+        "password"  :   "a123123",
+        "database"  :   "chatserver"
+    }
+}

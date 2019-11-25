@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Manage friend</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+    <form class="form-inline" action="/friend/add" method="POST">
+        <div class="form-group">
+            <input id="friend_email" type="text" name="friend_email" placeholder="Type email here">
+            <button type="submit" class="btn btn-primary">Add friend</button>
+        </div>
+    </form>
+    <div class="form-group" id="friend_reqs">
+        <h3>Requests</h3><br>
+        <details>
+            <summary>You sent requests to</summary>
+            <ul>
+                <% if(sent_requests){ %>
+                <% for(i=0; i<sent_requests.length; i++) { %>
+                <li><%= sent_requests[i].nickname %>(<%= sent_requests[i].email %>)</li>
+                <% } %>
+                <% } %>
+            </ul>
+        </details>
+    </div>
+    <div class="form-group" id="friend_recv_reqs">
+        <details>
+            <summary>You got requests from</summary>
+            <ul>
+                <% if(recv_requests) { %>
+                <% for(i=0; i<recv_requests.length; i++) { %>
+                <li><%= recv_requests[i].nickname%>(<%= recv_requests[i].email %>)
+                    <form action="/friend/accept" method="POST">
+                        <input type="hidden" name="id" value="<%= recv_requests[i].sender %>">
+                        <input type="submit" name="accept" value="accept">
+                        <input type="submit" name="discard" value="discard" formaction="/friend/discard">
+                </li>
+                </form>
+                <% } %>
+                <% } %>
+            </ul>
+        </details>
+    </div>
+    <a href="/">Back</a>
+</body>
+
+</html>

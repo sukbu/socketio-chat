@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>main</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <h3>Hello <%= firstname %></h3>
+        <% if(!firstname) { %>
+        <form class="form-inline">
+            <div class="form-group">
+                <a href="/sign_in">Sign in</a><br>
+                <a href="/sign_up">Sign up</a>
+            </div>
+        </form>
+        <% } else { %>
+        <div class="form-group">
+            <a href="/info">Info</a><br>
+            <a href="/sign_out">Sign out</a><br>
+            <a href="/friend">Manage friend</a>
+        </div>
+
+
+            <% if(friendList) {%>
+            <div class="form-group" id="friend_list">
+                <ul>
+                    <label>Friends</label>
+                    <% for(i=0; i<friendList.length; i++) { %>
+                    <div>
+                        <li><%= friendList[i].nickname %>,<%=friendList[i].id%>
+
+                            <form action="/chat" method="POST">
+                                <input type="hidden" name="friend_id" value="<%= friendList[i].id %>">
+                                <input type="submit" value="Chat" class="btn btn-default">
+                            </form>
+                        </li>
+                    </div>
+                    <% } %>
+                <% } %>
+
+            </ul>
+        </div>
+        <% } %>
+
+    </div>
+
+</body>
+
+</html>

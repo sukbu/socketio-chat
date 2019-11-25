@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>sign_in</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <h3>Login</h3>
+        <form class="form-inline" id="sign_in" method="POST">
+            <div class="form-group">
+                <input type="text" id="email" name="email" placeholder="Email" class="inputbox"><br>
+                <input type="password" name="password" placeholder="Password" class="inputbox">
+            </div>
+            <button type="submit" class="btn btn-primary" formaction="/sign_in_process">Sign in</button>
+        </form>
+        <ul>
+            <li><a href="/sign_up">Sign up</a></li>
+            <li><a href="#">Forgot password?</a></li>
+        </ul>
+    </div>
+</body>
+</html>

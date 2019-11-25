@@ -1,0 +1,28 @@
+<html>
+<meta charset="utf-8">
+
+<head>
+    <title>Account</title>
+</head>
+
+<body>
+    <form action="/info/update" method="POST">
+        <input type="hidden" name="id" value="<%= accountInfo.id%>">
+        <p>
+            <input type="text" name="email" value="<%= accountInfo.email %>">
+        </p>
+        <p>
+            <input type="text" name="firstname" value="<%= accountInfo.firstname %>">
+        </p>
+        <p>
+            <input type="text" name="lastname" value="<%= accountInfo.lastname %>">
+        </p>
+        <p>
+            <input type="submit" value="Modify">
+        </p>
+        <a href="javascript:history.back();">Back</a>
+        <a href="/delete_account">Account delete</a>
+    </form>
+</body>
+
+</html>
