@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <title>Chat page</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
+
 <body>
   <div class="container">
     <h3>Send message</h3>
     <div id="chat"></div>
     <form class="form-horizontal" id="data">
-          <input type="hidden" value="<%= accountInfo.id %>" id="userid">
-          <input type="hidden" value="<%= accountInfo.nickname %>" id="name">
-          <input type="hidden" value="<%= targetid %>" id="targetid">
-          <input type="hidden" class="form-control" id="room" value="10" placeholder="Room">
+      <input type="hidden" value="<%= accountInfo.id %>" id="userid">
+      <input type="hidden" value="<%= accountInfo.nickname %>" id="name">
+      <input type="hidden" value="<%= targetid %>" id="targetid">
+      <!-- <input type="hidden" class="form-control" id="room" value="<%= accountInfo.id%>to<%=targetid%>"> -->
 
       <div class="form-group">
         <label for="msg" class="col-sm-2 control-label">Message</label>
@@ -27,45 +29,50 @@
         </div>
       </div>
     </form>
-    
+
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script>
-      var socket = io.connect('http://localhost:3000');
+    var host = '127.0.0.1';
+    var port = 3000;
 
-      socket.emit("join", {
-        userid: $("#userid").val(),
-        name: $("#name").val(),
-        targetid: $("#targetid").val(),
-        room: $("#room").val(),
-        msg: $("#msg").val()
-      })
+    var socket = io.connect(`${host}:${port}`);
 
-      socket.on("join", (data) => {
-        $('#chat').append("<div><strong>" + text(data) + "</strong> has joined</div>");
-      })
+    socket.emit("join", {
+      userid: $("#userid").val(),
+      name: $("#name").val(),
+      targetid: $("#targetid").val(),
+    })
 
-      $(function() {
-        $("#data").submit((e) => {
-          e.preventDefault();
+    var roomcode;
 
-          socket.emit("clnt msg", {
-            userid: $("#userid").val(),
-            name: $("#name").val(),
-            targetid: $("#targetid").val(),
-            room: $("#room").val(),
-            msg: $("#msg").val()
-          });
-          
-          $('#msg').val('');
+    socket.on("join", (data) => {
+      console.log(data.roomcode);
+      $('#chat').append("<div><strong>" + data.serv_msg + "</strong></div>");
+    })
+
+    $(function () {
+      $("#data").submit((e) => {
+        e.preventDefault();
+
+        socket.emit("clnt msg", {
+          userid: $("#userid").val(),
+          name: $("#name").val(),
+          targetid: $("#targetid").val(),
+          room: roomcode,
+          msg: $("#msg").val()
         });
+
+        $('#msg').val('');
+      });
     });
 
     socket.on("serv msg", (data) => {
-        $("#chat").append($('<div>').text(data));
+      $("#chat").append($('<div>').text(data));
     });
 
   </script>
 </body>
+
 </html>
