@@ -8,13 +8,13 @@
 
 <body>
     <div class="container">
-        <h3>Login</h3>
+        <h3>Sign in</h3>
         <form class="form-inline" id="sign_in" method="POST">
             <div class="form-group">
-                <input type="text" id="email" name="email" placeholder="Email" class="inputbox"><br>
-                <input type="password" name="password" placeholder="Password" class="inputbox">
+                <input type="text" id="email" name="email" placeholder="Email" class="form-control"><br>
+                <input type="password" name="password" placeholder="Password" class="form-control">
             </div>
-            <button type="submit" class="btn btn-primary" formaction="/sign_in_process">Sign in</button>
+            <button type="submit" formaction="/sign_in_process" class="btn btn-primary" >Sign in</button>
         </form>
         <ul>
             <li><a href="/sign_up">Sign up</a></li>

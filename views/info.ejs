@@ -3,25 +3,27 @@
 
 <head>
     <title>Account</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 
 <body>
+    <h3>Info</h3>
     <form action="/info/update" method="POST">
         <input type="hidden" name="id" value="<%= accountInfo.id%>">
         <p>
-            <input type="text" name="email" value="<%= accountInfo.email %>">
+            <input type="text" name="email" value="<%= accountInfo.email %>" class="form-control">
         </p>
         <p>
-            <input type="text" name="firstname" value="<%= accountInfo.firstname %>">
+            <input type="text" name="firstname" value="<%= accountInfo.firstname %>" class="form-control">
         </p>
         <p>
-            <input type="text" name="lastname" value="<%= accountInfo.lastname %>">
+            <input type="text" name="lastname" value="<%= accountInfo.lastname %>" class="form-control">
         </p>
         <p>
-            <input type="submit" value="Modify">
+            <input type="submit" value="Modify" class="btn btn-primary">
         </p>
         <a href="javascript:history.back();">Back</a>
-        <a href="/delete_account">Account delete</a>
+        <a href="/delete_account">Delete account</a>
     </form>
 </body>
 

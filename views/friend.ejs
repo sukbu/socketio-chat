@@ -16,7 +16,7 @@
     <div class="form-group" id="friend_reqs">
         <h3>Requests</h3><br>
         <details>
-            <summary>You sent requests to</summary>
+            <summary>You've sent requests to</summary>
             <ul>
                 <% if(sent_requests){ %>
                 <% for(i=0; i<sent_requests.length; i++) { %>
@@ -28,15 +28,15 @@
     </div>
     <div class="form-group" id="friend_recv_reqs">
         <details>
-            <summary>You got requests from</summary>
+            <summary>You've got requests from</summary>
             <ul>
                 <% if(recv_requests) { %>
                 <% for(i=0; i<recv_requests.length; i++) { %>
                 <li><%= recv_requests[i].nickname%>(<%= recv_requests[i].email %>)
                     <form action="/friend/accept" method="POST">
                         <input type="hidden" name="id" value="<%= recv_requests[i].sender %>">
-                        <input type="submit" name="accept" value="accept">
-                        <input type="submit" name="discard" value="discard" formaction="/friend/discard">
+                        <input type="submit" name="accept" value="accept" class="btn btn-default">
+                        <input type="submit" name="discard" value="discard" formaction="/friend/discard" class="btn btn-default">
                 </li>
                 </form>
                 <% } %>

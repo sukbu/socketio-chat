@@ -15,7 +15,6 @@
       <input type="hidden" value="<%= accountInfo.id %>" id="userid">
       <input type="hidden" value="<%= accountInfo.nickname %>" id="name">
       <input type="hidden" value="<%= targetid %>" id="targetid">
-      <!-- <input type="hidden" class="form-control" id="room" value="<%= accountInfo.id%>to<%=targetid%>"> -->
 
       <div class="form-group">
         <label for="msg" class="col-sm-2 control-label">Message</label>
@@ -29,14 +28,14 @@
         </div>
       </div>
     </form>
-
+    <a href="javascript:history.back();">Back</a>
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script>
     var host = '127.0.0.1';
     var port = 3000;
-
+    
     var socket = io.connect(`${host}:${port}`);
 
     socket.emit("join", {
@@ -45,10 +44,27 @@
       targetid: $("#targetid").val(),
     })
 
+    var chatdataFlag=false;
+
+      socket.on('LoadChatdata', (data) => {
+        console.log(data);
+        if (!chatdataFlag) {
+          for (var i = 0; i < data.length; i++) {
+            $('#chat').append('<div>[' + data[i].sender + ']  ' + data[i].msg + '</div>');
+          }
+        }
+        chatdataFlag = true;
+      })
+
     var roomcode;
 
     socket.on("join", (data) => {
+      roomcode = data.roomcode;
       console.log(data.roomcode);
+      $('#chat').append("<div><strong>" + data.serv_msg + "</strong></div>");
+    })
+
+    socket.on("disconnect", (data) => {
       $('#chat').append("<div><strong>" + data.serv_msg + "</strong></div>");
     })
 
@@ -69,7 +85,7 @@
     });
 
     socket.on("serv msg", (data) => {
-      $("#chat").append($('<div>').text(data));
+      $("#chat").append('<div>[' + data.name + ']  ' + data.msg + '</div>');
     });
 
   </script>
