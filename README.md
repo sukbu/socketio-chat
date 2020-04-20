@@ -1,9 +1,9 @@
 # socketio-chat  
- simple chatapp for college project  
- do 'npm i' first
+ Simple chat application for college project  
+ 
  
  # envs version  
- maria 10.4  
- node 10.16.3  
+ mariaDB 10.4  
+ node.js 10.16.3  
 
  
